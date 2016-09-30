@@ -28,11 +28,11 @@ void stacker::loadFile(string file, int numberOfImages){
 
       if( i > 9)
 	{
-	  fileName = fileName + "_0" + number + ".ppm";
+	  fileName = fileName + "/" + fileName + "_0" + number + ".ppm";
 	}
       else
 	{
-	  fileName = fileName + "_00" + number  + ".ppm";
+	  fileName = fileName + "/" + fileName + "_00" + number  + ".ppm";
 	}
       
       ifstream inFile;
