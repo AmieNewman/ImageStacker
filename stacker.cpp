@@ -14,8 +14,8 @@ void stacker::setNumImages(int num){ //set numberOfImages
 }
 
 void stacker::loadFile(string file, int numberOfImages){ //reads data from file into temp and sums the values of each struct member and puts the sums in pixels
-  int num;
-  pixel color;
+
+  pixel color;//making 'color' to put values of colors into in loop below
   inputFileName = file; //original fileName to not be manipulated
   
   fileName = file;  //fileName to be manipulated in loadFile
@@ -26,7 +26,7 @@ void stacker::loadFile(string file, int numberOfImages){ //reads data from file 
     string number = toNumber.str();
 
     if( i > 9)
-      {                                                                //string manipulation to find the correct files
+      {         //string manipulation to find the correct files- up to 9 in initial one because if it hits 10, then it will not find the right file(ex: 0010 instead of 010 for file image number)
 	fileName = fileName + "/" + fileName + "_0" + number + ".ppm";
       }
     else
@@ -48,13 +48,13 @@ void stacker::loadFile(string file, int numberOfImages){ //reads data from file 
 	{
 	  inFile >> color.red;   
 	  inFile >> color.green;
-	  inFile >> color.blue;    //read in each initial struct member and then push those values to pixels and temp
+	  inFile >> color.blue;    //read in each initial struct member -  calls pushback on both temp and pixels.
 	  pixels.push_back(color);
 	  temp.push_back(color);
 	}
 	else
 	  {
-	    inFile >> color.red;                  //reads in struct values to temp then stores the sums in pixels
+	    inFile >> color.red;                  //reads in struct values to temp for each color(red,green,blue) , puts them in temp temporarily to be added up-then stores the sums in pixels.
 	    inFile >> color.green;
 	    inFile >> color.blue;
 	    temp[j].red = color.red;
@@ -67,7 +67,7 @@ void stacker::loadFile(string file, int numberOfImages){ //reads data from file 
 	  }
     }
     
-    cout << fileName << endl;  //output for user to track stacking
+    cout << fileName << endl;  //output file for user to track stacking's progress
     inFile.close(); //close file
     fileName = file; //reset fileName for next manipulation
   }
